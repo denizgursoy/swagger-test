@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("course")
-@Api(value = "Course Management System")
+@Api(value = "Course Management System" , description = "This API is used to manage courses")
 public class CourseController {
 
     @Autowired

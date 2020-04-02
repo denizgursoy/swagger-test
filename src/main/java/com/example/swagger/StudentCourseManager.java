@@ -9,7 +9,7 @@ public class StudentCourseManager {
     }
 
     public Student getStudentById(long userId) {
-        return  new Student(userId,"deniz","gursoy");
+        return new Student(userId, "deniz", "gursoy");
     }
 
     public void addCourse(Course course) {
@@ -18,5 +18,9 @@ public class StudentCourseManager {
 
     public Course getCourseById(long courseId) {
         return null;
+    }
+
+    public void registerStudentToCourse(long stundetId, long courseId) {
+
     }
 }
