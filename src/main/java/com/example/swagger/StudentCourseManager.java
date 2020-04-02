@@ -9,6 +9,6 @@ public class StudentCourseManager {
     }
 
     public Student getStudentById(long userId) {
-        return  new Student();
+        return  new Student(userId,"deniz","gursoy");
     }
 }

@@ -27,7 +27,7 @@ public class SpringFoxConfig {
 
         return new Docket(DocumentationType.SWAGGER_2)
           .select()
-          .apis(RequestHandlerSelectors.any())
+          .apis(RequestHandlerSelectors.basePackage("com.example.swagger"))
           .paths(PathSelectors.any())
           .build().apiInfo(apiInfo);
     }
