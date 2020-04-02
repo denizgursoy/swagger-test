@@ -11,4 +11,12 @@ public class StudentCourseManager {
     public Student getStudentById(long userId) {
         return  new Student(userId,"deniz","gursoy");
     }
+
+    public void addCourse(Course course) {
+
+    }
+
+    public Course getCourseById(long courseId) {
+        return null;
+    }
 }
