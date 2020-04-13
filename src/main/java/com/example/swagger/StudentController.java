@@ -2,8 +2,9 @@ package com.example.swagger;
 
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,7 +15,7 @@ public class StudentController {
     @Autowired
     private StudentCourseManager studentCourseManager;
 
-    @RequestMapping(value = "addStudent", method = RequestMethod.POST)
+    @PostMapping
     @ApiOperation(value = "Registers a new student to  the system")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -26,7 +27,7 @@ public class StudentController {
         studentCourseManager.addStudent(student);
     }
 
-    @RequestMapping(value = "getStudent", method = RequestMethod.GET)
+    @GetMapping
     @ApiOperation(value = "Returns a student's information with a given id")
     public Student getStudent(@ApiParam(value = "Student's unique id given by the system") long studentId) {
         return studentCourseManager.getStudentById(studentId);

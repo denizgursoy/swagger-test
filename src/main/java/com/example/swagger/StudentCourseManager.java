@@ -1,5 +1,6 @@
 package com.example.swagger;
 
+import com.example.swagger.exceptions.StudentAlreadyRegisteredException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -30,12 +31,17 @@ public class StudentCourseManager {
         return null;
     }
 
-    public void registerStudentToCourse(long stundetId, long courseId) {
+    public void registerStudentToCourse(long stundetId, long courseId) throws StudentAlreadyRegisteredException {
 
         if(!registration.containsKey(courseId)){
             registration.put(courseId, new ArrayList<>(Arrays.asList(stundetId)));
         }else{
-            registration.get(courseId).add(stundetId);
+            if(  registration.get(courseId).contains(stundetId)){
+              throw   new StudentAlreadyRegisteredException(stundetId,courseId);
+            }else{
+                registration.get(courseId).add(stundetId);
+            }
+
         }
     }
 }
