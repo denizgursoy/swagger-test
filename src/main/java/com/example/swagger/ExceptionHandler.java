@@ -2,6 +2,7 @@ package com.example.swagger;
 
 import com.example.swagger.exceptions.InventoryException;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +14,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Component
+@Slf4j
 public class ExceptionHandler extends AbstractHandlerExceptionResolver {
+
     @Override
     protected ModelAndView doResolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
 
@@ -25,15 +28,15 @@ public class ExceptionHandler extends AbstractHandlerExceptionResolver {
             httpServletResponse.setStatus(inventoryException.getStatus().value());
 
 
-            PrintWriter out = null;
             try {
-                out = httpServletResponse.getWriter();
+                PrintWriter out = httpServletResponse.getWriter();
+                out.print(new Gson().toJson(inventoryException));
+                out.flush();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                logger.error(e.getMessage(), e);
             }
-            out.print(new Gson().toJson(inventoryException));
-            out.flush();
-        }else{
+
+        } else {
             httpServletResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return new ModelAndView();

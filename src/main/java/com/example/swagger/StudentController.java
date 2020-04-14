@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value = "Student Affairs System", description = "This API is used to make simple students registration affairs like adding, and  removing")
+@Api(value = "Student Affairs System")
 @RequestMapping("/student")
 public class StudentController {
 

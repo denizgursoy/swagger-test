@@ -3,17 +3,14 @@ package com.example.swagger;
 import com.example.swagger.exceptions.StudentAlreadyRegisteredException;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class StudentCourseManager {
 
-    List<Student> studentList= new ArrayList<>();
-    List<Course> courses= new ArrayList<>();
-    HashMap<Long,List<Long>> registration= new HashMap<>();
+    List<Student> studentList = new ArrayList<>();
+    List<Course> courses = new ArrayList<>();
+    HashMap<Long, List<Long>> registration = new HashMap<>();
 
     public void addStudent(Student student) {
         studentList.add(student);
@@ -27,18 +24,19 @@ public class StudentCourseManager {
         courses.add(course);
     }
 
-    public Course getCourseById(long courseId) {
-        return null;
+    public Optional<Course> getCourseById(long courseId) {
+        return courses.stream().filter(course -> course.getCourseId() == courseId)
+                .findAny();
     }
 
     public void registerStudentToCourse(long stundetId, long courseId) throws StudentAlreadyRegisteredException {
 
-        if(!registration.containsKey(courseId)){
+        if (!registration.containsKey(courseId)) {
             registration.put(courseId, new ArrayList<>(Arrays.asList(stundetId)));
-        }else{
-            if(  registration.get(courseId).contains(stundetId)){
-              throw   new StudentAlreadyRegisteredException(stundetId,courseId);
-            }else{
+        } else {
+            if (registration.get(courseId).contains(stundetId)) {
+                throw new StudentAlreadyRegisteredException(stundetId, courseId);
+            } else {
                 registration.get(courseId).add(stundetId);
             }
 

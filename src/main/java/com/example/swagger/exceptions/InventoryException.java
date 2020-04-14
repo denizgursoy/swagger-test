@@ -4,21 +4,28 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 public class InventoryException extends Exception {
+
+    private final HttpStatus status;
     @Getter
-    private HttpStatus status;
-    @Getter
-    private String message;
+    private final String message;
 
     @Getter
-    private String target;
+    private final String target;
 
     public InventoryException(HttpStatus httpStatus, String message) {
         this.status = httpStatus;
         this.message = message;
+        this.target = null;
     }
 
     public InventoryException(HttpStatus httpStatus, String message, String target) {
-        this(httpStatus, message);
+        this.status = httpStatus;
         this.message = message;
+        this.target = target;
+
+    }
+
+    public HttpStatus getStatus() {
+        return status;
     }
 }
